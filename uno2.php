@@ -17,8 +17,8 @@ include "simplehtmldom/simple_html_dom.php";
 
 //VARIJABLE ZA POPUNITI
 
-$stranica_prodavnice = "https://tis.rs/plocasti-materijali/compact-laminati/"; // Stranica prodavnice. Prva u paginaciji.
-$dugme = ".tg-item-title a"; // Klasa dugmeta koji šalje na link proizvoda (sa tačkom)
+$stranica_prodavnice = "http://www.sindex.rs/bra%C4%8Dnikreveti"; // Stranica prodavnice. Prva u paginaciji.
+$dugme = ".boxitem a"; // Klasa dugmeta koji šalje na link proizvoda (sa tačkom)
 
 
 //VARIJABLE ZA POPUNITI - END

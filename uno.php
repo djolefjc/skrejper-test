@@ -1,5 +1,5 @@
 <?php
-//SkrejpT 1.0
+//SkrejpT v1.0
 
 // SA PAGINACIJOM
 
@@ -7,6 +7,7 @@
 //Uključivanje prikaza php errora radi debugovanja.
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
+set_time_limit(9999);
 error_reporting(E_ALL);
 
 
@@ -17,10 +18,10 @@ include "simplehtmldom/simple_html_dom.php";
 
 //VARIJABLE ZA POPUNITI
 
-$stranica_prodavnice = "https://www.formaideale.rs/proizvodi/"; // Stranica prodavnice. Prva u paginaciji.
-$dugme = ".product-list--main a"; // Klasa dugmeta koji šalje na link proizvoda (sa tačkom)
-$broj_stranica = 54; //Broj stranica na prodavnici koju skrejpujemo.
-$stranica_stranice = "https://www.formaideale.rs/proizvodi/strana/"; // Stranica prodavnice, paginacija
+$stranica_prodavnice = "http://www.sindex.rs/klubsto?pn_2843457=1"; // Stranica prodavnice. Prva u paginaciji.
+$dugme = ".boxitem a"; // Klasa dugmeta koji šalje na link proizvoda (sa tačkom)
+$broj_stranica = 2; //Broj stranica na prodavnici koju skrejpujemo.
+$stranica_stranice = "http://www.sindex.rs/klubsto?pn_2843457=2"; // Stranica prodavnice, paginacija
 
 //VARIJABLE ZA POPUNITI - END
 
@@ -54,6 +55,7 @@ $html = new simple_html_dom();
 $html->load($response);
 
 //Tražimo elemente sa određenom klasom koju smo pronašli puten inspecta.
+
 $products = $html->find($dugme);
 
 //Lupujemo kroz elemente i stavljamo linkove u niz
