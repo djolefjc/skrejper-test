@@ -52,43 +52,80 @@ foreach($lines as $line){
 
 $product_img = "";
 $product_title = "";
-$product_info = ""; 
+$product_info = "";
+$product_desc = "";
+$product_author = "";
+$product_date = "";
+$product_desc_img = [];
 
 
+//VARIJABLE ZA POPUNITI
 
-//VARIJABLE ZA POPUNITI\
-
-$slika_proizvoda = "#prod_img_main"; //Klasa slike proizvoda (href)
-$ime_proizvoda = ".title-buy";
-$info_proizvoda = "#buy_prod_description";
+$title = ".breadcrumb .active";
+$img = ".vest-singl-body .glavna";
+$cat = ".vest-singl-meta .vest-singl-cat a";
+$author = ".vest-singl-izvor";
+$desc = ".vest-singl-body";
+$desc_img = ".vest-singl-body img";
+$date = ".vest-singl-date";
+$slike_test = "";
 
 //VARIJABLE ZA POPUNITI - END
 
 
 //Izvlacenje vrednosti sa stranice.
-foreach($html->find($slika_proizvoda) as $t){
-$product_img = $t->src;
-}
-
-foreach($html->find($info_proizvoda) as $t){
- $product_info = $t->plaintext;
-}
-
-foreach($html->find($ime_proizvoda) as $t){
+foreach($html->find($title) as $t){
   $product_title = $t->plaintext;
 }
 
+foreach($html->find($img) as $t){
+$product_img = $t->src;
+}
 
+foreach($html->find($desc) as $t){
+ $product_desc = $t->plaintext;
+}
+
+foreach($html->find($desc_img) as $t){
+  if($t->class != 'glavna'){
+    array_push($product_desc_img,$t->src);
+  }
+
+
+}
+
+foreach($html->find($cat) as $t){
+ $product_cat = $t->plaintext;
+}
+
+foreach($html->find($author) as $t){
+ $product_author = $t->plaintext;
+}
+
+foreach($html->find($date) as $t){
+ $product_date = $t->plaintext;
+}
+
+
+$product_desc = str_replace("Celu vest možete pogledati ovde...","",$product_desc);
+foreach($product_desc_img as $ss){
+  $product_desc .= "<br>". "<img src='".$ss."' height='420' width='750' class='attachment-large size-large wp-post-image' alt='Vesti - Agroekonomija - Agrodan'>";
+}
 
 //Dodavanje vrednosti u niz koji koristimo za export u csv.
   $row[$i]['img'] = $product_img;
   $row[$i]['title'] = $product_title;
-  $row[$i]['cat'] = "Bračni kreveti";
-  $row[$i]['desc'] = $product_info;
+  $row[$i]['cat'] = 'Vesti > '.$product_cat;
+  $row[$i]['desc'] = $product_desc;
+  $row[$i]['author'] = str_replace("Izvor:","",$product_author);
+  $row[$i]['date'] = $product_date;
+
+
 
 
 
 $i++;
+
 
 
 } //Kraj foreach loop-a linkova
@@ -101,18 +138,18 @@ $i++;
 
 $delimiter = ",";
 
-$filename = "kuhinje-nove" . ".csv"; // Create file name
+$filename = "vesti-agrodan-agroekonomija" . ".csv"; // Create file name
 
 // Napravi pointer
 $f = fopen('memory.txt', 'r+');
 
 //Postavi hedere za kolone tabele.
-$fields = array('Slika','Ime','Kategorija','Opis');
+$fields = array('featured_image','post_title','post_category','post_content','post_author','post_date','post_format','comment_status','post_status');
 
 //Izbaci sve podatke u redu i stavi u pointer.
 foreach($row as $r){
 
-   $lineData = array($r['img'],$r['title'],$r['cat'],substr($r['desc'],5));
+   $lineData = array($r['img'],$r['title'],$r['cat'],$r['desc'],$r['author'],$r['date'],'post-standard','open','publish');
    fputcsv($f, $lineData, $delimiter);
  }
 

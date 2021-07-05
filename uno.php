@@ -18,10 +18,10 @@ include "simplehtmldom/simple_html_dom.php";
 
 //VARIJABLE ZA POPUNITI
 
-$stranica_prodavnice = "http://www.sindex.rs/klubsto?pn_2843457=1"; // Stranica prodavnice. Prva u paginaciji.
-$dugme = ".boxitem a"; // Klasa dugmeta koji šalje na link proizvoda (sa tačkom)
-$broj_stranica = 2; //Broj stranica na prodavnici koju skrejpujemo.
-$stranica_stranice = "http://www.sindex.rs/klubsto?pn_2843457=2"; // Stranica prodavnice, paginacija
+$stranica_prodavnice = "http://www.agrodan.rs/vesti/agroekonomija/0"; // Stranica prodavnice. Prva u paginaciji.
+$dugme = ".vest-prev-title a"; // Klasa dugmeta koji šalje na link proizvoda (sa tačkom)
+$broj_stranica = 226; //Broj stranica na prodavnici koju skrejpujemo.
+$stranica_stranice = "http://www.agrodan.rs/vesti/agroekonomija/1"; // Stranica prodavnice, paginacija
 
 //VARIJABLE ZA POPUNITI - END
 
